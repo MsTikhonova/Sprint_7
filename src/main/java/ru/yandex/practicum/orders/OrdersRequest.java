@@ -6,16 +6,7 @@ public class OrdersRequest {
     private final String ROOT = "/orders";
     private final String GET = ROOT + "?limit="+"{limit}";
 
-    public ValidatableResponse createWithDateFormat(OrderWithDateFormat order) {
-        return BaseClient.getSpec()
-                .body(order)
-                .when()
-                .post(ROOT)
-                .then().log().all();
-
-    }
-
-    public ValidatableResponse createWithoutDateFormat(Order order) {
+    public ValidatableResponse createOrder(Order order) {
         return BaseClient.getSpec()
                 .body(order)
                 .when()

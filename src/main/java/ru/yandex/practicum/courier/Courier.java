@@ -1,6 +1,7 @@
 package ru.yandex.practicum.courier;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import ru.yandex.practicum.config.Config;
 
 public class Courier {
 
@@ -22,7 +23,7 @@ public class Courier {
     public static Courier getRandomCourier() {
         return new Courier(
                 RandomStringUtils.randomAlphanumeric(10),
-                "Password",
+                Config.PASSWORD,
                 RandomStringUtils.randomAlphabetic(10)
         );
     }
@@ -38,7 +39,7 @@ public class Courier {
     public static Courier getCourierWithoutLogin() {
         return new Courier(
                 "",
-                "Password",
+                Config.PASSWORD,
                 RandomStringUtils.randomAlphabetic(10)
         );
     }
@@ -46,7 +47,7 @@ public class Courier {
     public static Courier getCourierWithoutFirstName() {
         return new Courier(
                 RandomStringUtils.randomAlphanumeric(10),
-                "Password",
+                Config.PASSWORD,
                 ""
         );
     }

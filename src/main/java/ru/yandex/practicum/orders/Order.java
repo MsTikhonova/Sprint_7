@@ -1,7 +1,10 @@
 package ru.yandex.practicum.orders;
 
+import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+
+import java.util.concurrent.TimeUnit;
 
 public class Order {
     private String firstName;
@@ -12,7 +15,7 @@ public class Order {
     private Number rentTime;
     private String deliveryDate;
     private String comment;
-    String[] color;
+    private String[] color;
 
 
     public Order(String firstName, String lastName, String address, String metroStation, String phone, Number rentTime, String deliveryDate, String comment, String[] color) {
@@ -38,7 +41,44 @@ public class Order {
         this.comment = comment;
     }
 
-    public static Order getRandomOrderWithColour(String[] color) {
+    public static Order getRandomOrderWithColor(String[] color) {
+        Faker faker = new Faker();
+        return new Order(
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                faker.expression("#{numerify '+79#########'}"),
+//              заменён харкод в комментарии ниже
+//                "+7" + RandomStringUtils.randomNumeric(10),
+                RandomUtils.nextInt(1,9),
+                faker.date().future(10, TimeUnit.DAYS, "YYYY-MM-dd"),
+//              заменён харкод в комментарии ниже
+//                "20" +RandomUtils.nextInt(0,22)+"-"+RandomUtils.nextInt(1,12)+"-"+RandomUtils.nextInt(1,28),
+                RandomStringUtils.randomAlphabetic(10),
+                color
+        );
+    }
+
+    public static Order getRandomOrderWithoutColor() {
+        Faker faker = new Faker();
+        return new Order(
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10),
+                faker.expression("#{numerify '+79#########'}"),
+//              заменён харкод в комментарии ниже
+//                "+7" + RandomStringUtils.randomNumeric(10),
+                RandomUtils.nextInt(1,9),
+                faker.date().future(10, TimeUnit.DAYS, "YYYY-MM-dd"),
+//              заменён харкод в комментарии ниже
+//                "20" +RandomUtils.nextInt(0,22)+"-"+RandomUtils.nextInt(1,12)+"-"+RandomUtils.nextInt(1,28),
+                RandomStringUtils.randomAlphabetic(10)
+        );
+    }
+
+    public static Order getRandomOrderWithRandomDataFormat(String[] color) {
         return new Order(
                 RandomStringUtils.randomAlphabetic(10),
                 RandomStringUtils.randomAlphabetic(10),
@@ -120,7 +160,7 @@ public class Order {
         return color;
     }
 
-    public void setColor(String[]  color) {
+    public void setColor(String[] color) {
         this.color = color;
     }
 }
